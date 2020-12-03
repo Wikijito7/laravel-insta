@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +11,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['middleware' => 'auth'], function() {
+  Route::get('/', 'ImagenesController@index')->name('imagenes.index');
+  Route::get('/subir', 'ImagenesController@create')->name('imagenes.subir');
+  Route::post('/subir', 'ImagenesController@store')->name('imagenes.guardar');
 });
+
+Auth::routes();
+
+Route::get('/salir', function() {
+  Auth::logout();
+  return redirect()->action('ImagenesController@index');
+});
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -13,14 +13,14 @@ class CrearTablaUsuarios extends Migration
      */
     public function up() {
         Schema::create('usuarios', function (Blueprint $table) {
-            $table->bigIncrementse('id');
+            $table->bigIncrements('id');
             $table->enum('rol', ['user', 'admin']);
-            $table->string('usarname');
-            $table->string('name');
-            $table->string('surname');
+            $table->string('username');
+            $table->string('name')->nullable();
+            $table->string('surname')->nullable();
             $table->string('email');
             $table->string('password');
-            $table->binary('image');
+            $table->string('avatar')->nullable();
         });
     }
 
