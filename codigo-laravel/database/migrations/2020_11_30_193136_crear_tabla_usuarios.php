@@ -17,10 +17,9 @@ class CrearTablaUsuarios extends Migration
             $table->enum('rol', ['user', 'admin']);
             $table->string('username');
             $table->string('name')->nullable();
-            $table->string('surname')->nullable();
             $table->string('email');
             $table->string('password');
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default('default/default-avatar.png');
         });
     }
 

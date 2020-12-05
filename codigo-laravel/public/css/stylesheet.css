@@ -2,6 +2,36 @@ body {
 
 }
 
+.avatar {
+  width: 32px;
+  height: 32px;
+}
+
+.image a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1em;
+  text-decoration: none;
+}
+
+.desp {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  background: #fafafa;
+  max-width: 160px;
+}
+
+.desp a {
+  display: block;
+}
+
+.image a span {
+  color: black;
+  margin-left: 0.6em;
+}
+
 .image {
   background: #cacaca;
   border-bottom: 2px solid black;

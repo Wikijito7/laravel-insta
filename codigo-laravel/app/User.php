@@ -18,10 +18,8 @@ class User extends Authenticatable {
     public $timestamps = false;
 
     public function images() {
-       return $this->hasMany('App\Images');
+       return $this->hasMany('App\Images', 'id_user')->orderBy('id', 'DESC');
    }
-
-   
 
     protected $fillable = [
         'username', 'email', 'password',

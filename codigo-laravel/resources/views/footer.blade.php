@@ -4,6 +4,6 @@
   <a href="https://wokis.es">Web personal.</a>
 </footer>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-<script defer src="./js/script.js"></script>
+<script defer src="/js/script.js"></script>
 </body>
 </html>

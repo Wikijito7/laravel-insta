@@ -12,6 +12,6 @@ class Images extends Model {
     }
 
     public function likes() {
-      return $this->hasMany('App\Comments');
+      return $this->hasMany('App\Likes');
     }
 }

@@ -14,4 +14,18 @@ function readURL(input) {
 
          reader.readAsDataURL(input.files[0]);
      }
- }
+}
+
+function sacarDesplegable() {
+  let desp = document.getElementById('desp');
+  desp.style.display = "block";
+}
+
+window.onclick = function(event) {
+  let btn = document.getElementById('profile');
+  let desp = document.getElementById('desp');
+
+  if (event.target != btn) {
+    desp.style.display = "none";
+  }
+}

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Storage;
 
+use Carbon\Carbon;
+
 class ImagenesController extends Controller {
     /**
      * Display a listing of the resource.
@@ -45,17 +47,22 @@ class ImagenesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+        $this->validate($request, [
+              'img' => 'required|mimes:jpeg,jpg,png',
+        ]);
+
         $last = DB::table('images')->orderBy('id', 'DESC')->first();
         $number = $last != null ? $last->id + 1 : 1;
-        $filename = $request->user()->username."_".$number.'.'.$request->file('image')->extension();
+        $filename = $request->user()->username."_".$number.'.'.$request->file('img')->extension();
         $path = Storage::disk('images')->putFileAs(
-          $request->user()->username, $request->file('image'),
+          $request->user()->username, $request->file('img'),
           $filename);
 
         $imagen = DB::table('images')->insert([
           'id_user' => $request->user()->id,
           'image' => $filename,
-          'descripcion' => $request->input('desc')
+          'descripcion' => $request->input('desc'),
+          'created_at' => Carbon::now()->toDateTimeString(),
         ]);
         return redirect()->action('ImagenesController@index');
     }
