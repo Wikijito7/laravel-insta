@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Auth;
+
 use Carbon\Carbon;
+
+use App\Images;
 
 class ImagenesController extends Controller {
     /**
@@ -67,13 +71,36 @@ class ImagenesController extends Controller {
         return redirect()->action('ImagenesController@index');
     }
 
+    public function like($id) {
+      if (Images::find($id) != null) {
+        $user_id = Auth::user()->id;
+        $liked = Images::find($id)->likes->where('id_user', $user_id)->first() == null;
+        if ($liked){
+          DB::table('likes')->insert([
+            'id_user' => $user_id,
+            'id_image' => $id,
+          ]);
+        } else {
+          DB::table('likes')->where('id_user', $user_id)->where('id_image', $id)->delete();
+        }
+      }
+      return redirect()->action('ImagenesController@index');
+    }
+
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {}
+    public function show($id) {
+
+      return view('image', array(
+        'titulo' => "Imagen - " . $id,
+        'principal' => true,
+        'image' => Images::find($id)
+      ));
+    }
 
     /**
      * Show the form for editing the specified resource.

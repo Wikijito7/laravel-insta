@@ -16,7 +16,9 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/', 'ImagenesController@index')->name('imagenes.index');
   Route::get('/subir', 'ImagenesController@create')->name('imagenes.subir');
   Route::post('/subir', 'ImagenesController@store')->name('imagenes.guardar');
-  Route::get('/u/{id}', 'ProfileController@show');
+  Route::get('/u/{id}', 'ProfileController@show')->name('perfil.mostrar');
+  Route::get('/like/{id}', 'ImagenesController@like')->name('imagen.like');
+  Route::get('/p/{id}', 'ImagenesController@show');
 });
 
 Auth::routes();

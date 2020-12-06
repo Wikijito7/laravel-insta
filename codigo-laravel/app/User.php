@@ -21,6 +21,19 @@ class User extends Authenticatable {
        return $this->hasMany('App\Images', 'id_user')->orderBy('id', 'DESC');
    }
 
+   public function comments() {
+     return $this->hasMany('App\Comments', 'id_user');
+   }
+
+   public function likes() {
+     return $this->hasMany('App\Likes', 'id_user');
+   }
+
+   public function hasLiked($id) {
+     $image = $this->likes()->where('id_image', $id)->first();
+     return $image != null;
+   }
+
     protected $fillable = [
         'username', 'email', 'password',
     ];
