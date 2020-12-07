@@ -1,8 +1,7 @@
 @include('head')
 @include('header')
 <main>
-  <span>Iniciado sesión con: {{Auth::user()->username}}</span>
-  <section>
+  <section id='images'>
     @foreach ($images as $image)
       <article class="image">
         <header>

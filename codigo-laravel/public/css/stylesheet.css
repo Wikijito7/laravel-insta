@@ -1,5 +1,19 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 
+:root {
+  --white: #fdfdfd;
+  --black: #101010;
+  --code: #40e0d0;
+  --heart: purple;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--black);
+  background: var(--white);
+  margin: 0;
+  padding: 0;
 }
 
 .avatar {
@@ -11,6 +25,92 @@ body {
   cursor: pointer;
 }
 
+#insta {
+  font-family: 'Lobster', cursive;
+  font-size: 2em;
+  text-decoration: none;
+  color: var(--black);
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  padding: 0 5rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+header img {
+  border-radius: 50%;
+}
+
+header span {
+  font-weight: 600;
+}
+
+main, footer {
+  padding: 0 5rem;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+}
+
+nav a {
+  margin: 0 0.5em;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.desp {
+  display: none;
+  position: absolute;
+  margin-top: 0.5em;
+  z-index: 1;
+  background: #fafafa;
+  max-width: 160px;
+  padding: 1rem;
+  border: 1px solid #aaaaaa;
+  border-radius: 0.25rem;
+
+}
+
+.desp a {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.5em;
+  text-decoration: none;
+  color: var(--black);
+  padding: 0.25em;
+}
+
+.desp a:hover {
+  background: #acacac;
+}
+
+#images {
+  margin: 1em auto;
+  max-width: 1000px;
+}
+
+.image {
+  margin-bottom: 2.5em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.25rem;
+  border: 1px solid #dadada;
+  padding: 0;
+}
+
+.image header, .fecha {
+  padding: 0;
+  margin: 0.75rem 20px;
+}
+
 .image a {
   display: flex;
   flex-direction: row;
@@ -20,29 +120,108 @@ body {
   cursor: pointer;
 }
 
-.desp {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  background: #fafafa;
-  max-width: 160px;
-}
-
-.desp a {
-  display: block;
-}
-
 .image a span {
   color: black;
   margin-left: 0.6em;
 }
 
-.image {
-  background: #cacaca;
-  border-bottom: 2px solid black;
-  margin-bottom: 2em;
+.image img {
+  max-width: 960px;
+}
+
+.image .img {
+    margin: 0 auto;
+}
+
+.image .options {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+}
+
+.options a {
+  margin-right: 0.5em;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.image span, .image .desc, .image .comments {
+  margin: 0 20px;
+}
+
+.comments form {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  align-items: center;
+}
+
+.comments > form > textarea {
+  width: 90%;
+  background: var(--white);
+  border: none;
+  border-bottom: 2px solid #acacac;
+  font-family: 'Open Sans', sans-serif;
+  max-height: 120px;
+  resize: none;
+}
+
+.comments > form > textarea:focus {
+  background: #dfdfdf;
+  border-bottom: 2px solid #909090;
+}
+
+.comments > form > input[type=submit] {
+  width: 9%;
+  background: var(--white);
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.comments > form > input[type=submit]:hover {
+  text-decoration: underline;
+}
+
+.comment {
+  margin-bottom: 0.5em;
+}
+
+.comment p {
+  margin-bottom: 0.25rem;
 }
 
 .comment a {
   display: inline;
+}
+
+.comment span {
+  margin: 0;
+}
+
+.comment span, .fecha {
+  font-size: 0.9rem;
+  color: #777777;
+}
+
+footer {
+  background: var(--white);
+  color: var(--black);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 1em;
+}
+
+footer p, footer a {
+  margin: 0.5em;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.fa-code {
+  color: var(--code);
+}
+
+.fa-heart {
+  color: var(--heart);
 }

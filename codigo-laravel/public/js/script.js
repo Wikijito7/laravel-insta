@@ -37,6 +37,11 @@ function ocultarForm() {
   desc.style.display = "block";
 }
 
+function upload() {
+  let form = document.getElementById('avatarform');
+  form.submit();
+}
+
 window.onclick = function(event) {
   let btn = document.getElementById('profile');
   let desp = document.getElementById('desp');

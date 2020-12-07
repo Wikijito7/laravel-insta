@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 use App\User;
 
 class ProfileController extends Controller
@@ -13,8 +17,7 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request) {
         //
     }
 
@@ -23,10 +26,7 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    public function create(){}
 
     /**
      * Store a newly created resource in storage.
@@ -34,10 +34,7 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    public function store(Request $request){}
 
     /**
      * Display the specified resource.
@@ -47,12 +44,14 @@ class ProfileController extends Controller
      */
     public function show($id) {
         $table_user = DB::table('usuarios')->where('username', $id)->first();
+
         if ($table_user == null) {
           return redirect()->action('ImagenesController@index');
         }
+
         $user = User::find($table_user->id);
         return view('profile', array(
-          'titulo' => "Perfil ".$user->username,
+          'titulo' => "Perfil " . $user->username,
           'principal' => true,
           'user' => $user,
           'images' => $user->images,
@@ -65,9 +64,40 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit() {
+      $user = Auth::user();
+      return view('config', array(
+        'titulo' => "Editar perfil",
+        'principal' => true,
+        'user' => $user,
+      ));
+    }
+
+    public function cambiarAvatar(Request $request) {
+      $this->validate($request, [
+        'img' => 'required|mimes:jpeg,jpg,png',
+      ]);
+
+      $filename = $request->user()->username.'.'.$request->file('img')->extension();
+
+      Storage::disk('avatars')->putFileAs(
+        '', $request->file('img'),
+        $filename);
+
+      DB::table('usuarios')->where('id', $request->user()->id)->update([
+        'avatar' => $filename
+      ]);
+      return redirect()->action('ProfileController@edit');
+    }
+
+    public function eliminarAvatar() {
+      $filename = $request->user()->username.'.'.$request->file('img')->extension();
+      Storage::disk('images')->delete($filename);
+
+      DB::table('usuarios')->where('id', $request->user()->id)->update([
+        'avatar' => 'default/default-avatar.png'
+      ]);
+      return redirect()->action('ProfileController@edit');
     }
 
     /**
@@ -77,9 +107,13 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request) {
+      DB::table('usuarios')->where('id', $request->user()->id)->update([
+        'name' => $request->name,
+        'email' => $request->email,
+      ]);
+
+      return redirect()->action('ProfileController@edit');
     }
 
     /**
@@ -88,8 +122,5 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+    public function destroy($id) {}
 }
