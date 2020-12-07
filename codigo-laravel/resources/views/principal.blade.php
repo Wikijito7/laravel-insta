@@ -26,14 +26,26 @@
         <p class="desc">{{$image->descripcion}}</p>
         <div class="comments">
           @foreach(App\Images::find($image->id)->comments as $comment)
-            <p>{{$comment}}</p>
+          <article class="comment">
+            <p>
+              <a href="/u/{{\App\User::find($comment->id_user)->username}}">
+                {{\App\User::find($comment->id_user)->username}}
+              </a>
+              : {{$comment->descripcion}}
+            </p>
+            <span>{{\Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i:s')}}</span>
+          </article>
           @endforeach
-          <form class="" action="index.html" method="post">
-
+          <form class="" action="/enviar-comentario" method="post">
+            @csrf
+            <input hidden type="text" name="image" value="{{$image->id}}">
+            <textarea name="comentario" rows="2" placeholder="Añade un comentario..."
+            cols="80" autocomplete="off" autocorrect="off"></textarea>
+            <input type="submit" name="enviar" value="Publicar">
           </form>
         </div>
         @if($image->created_at != null)
-          <p>{{\Carbon\Carbon::parse($image->created_at)->format('d/m/Y H:i:s')}}</p>
+          <p class="fecha">{{\Carbon\Carbon::parse($image->created_at)->format('d/m/Y H:i:s')}}</p>
         @endif
       </article>
     @endforeach

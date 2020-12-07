@@ -7,12 +7,17 @@ body {
   height: 32px;
 }
 
+#profile {
+  cursor: pointer;
+}
+
 .image a {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-bottom: 1em;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .desp {
@@ -36,4 +41,8 @@ body {
   background: #cacaca;
   border-bottom: 2px solid black;
   margin-bottom: 2em;
+}
+
+.comment a {
+  display: inline;
 }

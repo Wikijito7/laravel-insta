@@ -18,7 +18,7 @@ class TablaImages extends Migration
             $table->bigInteger('id_user')->unsigned();
             $table->string('image');
             $table->mediumText('descripcion')->nullable();
-            $table->foreign('id_user')->references('id')->on('usuarios');
+            $table->foreign('id_user')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

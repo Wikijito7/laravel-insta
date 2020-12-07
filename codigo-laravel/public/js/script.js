@@ -21,6 +21,22 @@ function sacarDesplegable() {
   desp.style.display = "block";
 }
 
+function mostrarForm() {
+  let form = document.getElementById('form-desc');
+  let desc = document.getElementById('desc');
+
+  form.style.display = "block";
+  desc.style.display = "none";
+}
+
+function ocultarForm() {
+  let form = document.getElementById('form-desc');
+  let desc = document.getElementById('desc');
+
+  form.style.display = "none";
+  desc.style.display = "block";
+}
+
 window.onclick = function(event) {
   let btn = document.getElementById('profile');
   let desp = document.getElementById('desp');

@@ -17,9 +17,8 @@ class TablaLikes extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_user')->unsigned();
             $table->bigInteger('id_image')->unsigned();
-            $table->foreign('id_user')->references('id')->on('usuarios');
-            $table->foreign('id_image')->references('id')->on('images');
-
+            $table->foreign('id_user')->references('id')->on('usuarios')->onDelete('cascade');
+            $table->foreign('id_image')->references('id')->on('images')->onDelete('cascade');
         });
     }
 

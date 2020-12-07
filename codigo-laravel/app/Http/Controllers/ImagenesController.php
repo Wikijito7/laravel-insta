@@ -87,6 +87,16 @@ class ImagenesController extends Controller {
       return redirect()->action('ImagenesController@index');
     }
 
+    public function comment(Request $request) {
+      DB::table('comments')->insert([
+        'id_user' => $request->user()->id,
+        'id_image' => $request->image,
+        'descripcion' => $request->comentario,
+        'created_at' => Carbon::now()->toDateTimeString(),
+      ]);
+      return redirect('/p/'.$request->image);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -94,12 +104,16 @@ class ImagenesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-
-      return view('image', array(
-        'titulo' => "Imagen - " . $id,
-        'principal' => true,
-        'image' => Images::find($id)
-      ));
+      $image = Images::find($id);
+      if ($image != null) {
+        return view('image', array(
+          'titulo' => "Imagen - " . $image->descripcion,
+          'principal' => true,
+          'image' => $image
+        ));
+      } else {
+        return redirect()->action('ImagenesController@index');
+      }
     }
 
     /**
@@ -108,9 +122,7 @@ class ImagenesController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        //
-    }
+    public function edit($id) {}
 
     /**
      * Update the specified resource in storage.
@@ -120,9 +132,15 @@ class ImagenesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        //
-    }
+      $image = Images::find($id);
 
+      if ($image->id_user == $request->user()->id) {
+        DB::table('images')->where('id', $id)->update([
+          'descripcion' => $request->descripcion
+        ]);
+      }
+      return redirect('/p/'.$id);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -130,6 +148,12 @@ class ImagenesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //
+      $img = Images::find($id);
+      if ($img != null && $img->id_user == Auth::user()->id) {
+        Storage::disk('images')->delete(Auth::user()->username.'/'.$img->image);
+        DB::table('images')->where('id', $id)->delete();
+      }
+
+      return redirect()->action('ImagenesController@index');
     }
 }
