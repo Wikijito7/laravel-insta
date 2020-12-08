@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/config', 'ProfileController@update')->name('perfil.update');
   Route::post('/avatar', 'ProfileController@cambiarAvatar')->name('perfil.avatar');
   Route::get('/delavatar', 'ProfileController@eliminarAvatar')->name('perfil.delavatar');
+  Route::post('/buscar', 'ProfileController@index')->name('perfil.index');
 
 });
 

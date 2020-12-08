@@ -28,6 +28,8 @@ class ImagenesController extends Controller {
           'titulo' => "Principal",
           'principal' => true,
           'images' => $images,
+          'mostrar' => false,
+
         ));
 
     }
@@ -109,7 +111,8 @@ class ImagenesController extends Controller {
         return view('image', array(
           'titulo' => "Imagen - " . $image->descripcion,
           'principal' => true,
-          'image' => $image
+          'image' => $image,
+          'mostrar' => true,
         ));
       } else {
         return redirect()->action('ImagenesController@index');

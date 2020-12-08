@@ -16,6 +16,16 @@ body {
   padding: 0;
 }
 
+.error {
+  color: #a94442;
+  background: #f2dede;
+  border-radius: 0.25em;
+  margin: 0.5em 0;
+  padding: 1em;
+  display: block;
+  width: fit-content;
+}
+
 .avatar {
   width: 32px;
   height: 32px;
@@ -40,6 +50,8 @@ header {
   align-items: center;
   max-width: 1000px;
   margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header img {
@@ -57,13 +69,13 @@ main, footer {
 nav {
     display: flex;
     flex-direction: row;
-    margin-left: auto;
 }
 
 nav a {
-  margin: 0 0.5em;
+  margin: 0 1em;
   text-decoration: none;
   font-size: 1.2em;
+  color: var(--black);
 }
 
 .desp {
@@ -71,8 +83,8 @@ nav a {
   position: absolute;
   margin-top: 0.5em;
   z-index: 1;
-  background: #fafafa;
-  max-width: 160px;
+  background: #fcfcfc;
+  max-width: 200px;
   padding: 1rem;
   border: 1px solid #aaaaaa;
   border-radius: 0.25rem;
@@ -88,9 +100,21 @@ nav a {
   padding: 0.25em;
 }
 
-.desp a:hover {
-  background: #acacac;
+.desp svg {
+  margin-right: 5px;
 }
+
+.desp a:hover {
+  background: #dfdfdf;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* Imágenes */
 
 #images {
   margin: 1em auto;
@@ -111,6 +135,10 @@ nav a {
   margin: 0.75rem 20px;
 }
 
+.image header {
+  justify-content: space-between;
+}
+
 .image a {
   display: flex;
   flex-direction: row;
@@ -118,6 +146,13 @@ nav a {
   margin-bottom: 1em;
   text-decoration: none;
   cursor: pointer;
+}
+
+#dots {
+  margin-left: auto;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 0.35rem;
 }
 
 .image a span {
@@ -131,12 +166,15 @@ nav a {
 
 .image .img {
     margin: 0 auto;
+
 }
 
 .image .options {
   display: flex;
   flex-direction: row;
   margin-left: 20px;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .options a {
@@ -149,26 +187,48 @@ nav a {
   margin: 0 20px;
 }
 
-.comments form {
+#likes {
+  margin-bottom: 0.85rem;
+}
+
+.desc a {
+  text-decoration: none;
+  display: inline;
+  font-weight: 600;
+  color: var(--black);
+}
+
+#form-desc {
+  margin-left: 20px;
+}
+
+.comments form, #form-desc {
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
   align-items: center;
 }
 
-.comments > form > textarea {
+.comments > form > textarea, #form-desc > textarea {
   width: 90%;
+  height: 40px;
   background: var(--white);
   border: none;
-  border-bottom: 2px solid #acacac;
   font-family: 'Open Sans', sans-serif;
-  max-height: 120px;
+  max-height: 90px;
   resize: none;
 }
 
-.comments > form > textarea:focus {
-  background: #dfdfdf;
-  border-bottom: 2px solid #909090;
+#form-desc > textarea {
+  border: 1px solid #cacaca;
+  padding: 0.25em;
+  border-radius: 0.25rem;
+}
+
+.comments > form > textarea:focus, #form-desc > textarea:focus {
+  background: #f7f7f7;
+  height: 47px;
+  transition: 0.35s;
 }
 
 .comments > form > input[type=submit] {
@@ -193,16 +253,361 @@ nav a {
 
 .comment a {
   display: inline;
+  color: var(--black);
+  font-weight: 600;
+}
+
+.comment a:hover, .desc a:hover {
+  text-decoration: underline;
 }
 
 .comment span {
   margin: 0;
 }
 
-.comment span, .fecha {
+.comment span, .fecha, .info {
   font-size: 0.9rem;
   color: #777777;
 }
+
+/* Perfil */
+
+#user-info, .profile-images {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin: 2.5em 0;
+}
+
+.profile-images {
+  flex-flow: row wrap;
+}
+
+#user-info .img-cont {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 15%;
+  display: flex;
+  overflow: hidden;
+}
+
+#user-info .avatar{
+  width: unset;
+  height: unset;
+  max-width: 150px;
+  max-height: 150px;
+  margin: auto;
+}
+
+#user-info .username {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.info {
+  margin-top: 0;
+  font-size: 0.8em;
+  width: 377px;
+}
+
+.username a {
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #cacaca;
+  border-radius: 0.25em;
+  color: var(--black);
+  font-weight: 600;
+}
+
+#user-info .container {
+  display: flex;
+  flex-direction: column;
+}
+
+#user-info #username {
+  font-weight: 300;
+  font-size: 1.65em;
+  margin-right: 1em;
+}
+
+#user-info #pub {
+  margin: 1em 0;
+}
+
+#user-info #name {
+  display: block;
+  font-weight: 600;
+}
+
+.profile-images .img {
+  flex: 1 1 300px;
+  width: 300px;
+  height: 300px;
+  max-width: 300px;
+  max-height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.img {
+  display: flex;
+  margin: 0 1em;
+}
+
+.img a {
+    margin: auto;
+}
+
+.img img {
+  width: unset;
+  height: 100%;
+}
+
+.img .texto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  margin: 0;
+  background: #00000000;
+  color: var(--white);
+  display: flex;
+  opacity: 0;
+}
+
+.texto p {
+  margin: auto;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.img:hover .texto {
+  opacity: 100%;
+  background: #00000099;
+  transition: ease-in-out 0.25s;
+}
+
+/* Login register */
+
+.log-reg {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.log-reg form {
+  width: 60%;
+}
+
+.log-reg .center {
+  display: flex;
+  flex-direction: column;
+}
+
+.log-reg input[type="text"], .log-reg input[type="email"], .log-reg input[type=password]{
+  margin: 0.2em 0 0.5em;
+  padding: 0.5em;
+  width: 100%;
+  font-size: 1em;
+  outline: 0;
+  font-family: 'Open Sans', sans-serif;
+  border: 1px solid #bababa;
+  border-radius: 0.25em;
+}
+
+.log-reg label, .datos label {
+  font-weight: bold;
+}
+
+.log-reg button {
+  margin: 1rem auto;
+  margin-bottom: 0.25em;
+  border-radius: 0.25em;
+  background: #0095f6;
+  width: 50%;
+  border: 0;
+  padding: 15px;
+  color: var(--white);
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.center a {
+    margin: 0 auto;
+    text-decoration: none;
+    color: var(--black);
+}
+
+.center a:hover {
+    text-decoration: underline;
+}
+
+/* Config */
+
+#config .img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2.5em 0;
+}
+
+#config .img img {
+  margin-right: 5em;
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 50%;
+}
+
+#config .cambiaravatar {
+  display: flex;
+  flex-direction: column;
+}
+
+.cambiaravatar span {
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.cambiaravatar label, #subir {
+  color: #0095f6;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cambiaravatar a {
+  color: #ed4956;
+  margin: 1em 0;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.datos {
+  margin-top: 2em;
+  margin-left: 230px;
+}
+
+.datos input[type=submit], #subirform input[type=submit] {
+  background: #0095f6;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25em;
+  border: 0;
+  margin-top: 0.75rem;
+  font-weight: 600;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.datos input[type=text], #search input[type=text] {
+  margin: 0.5em 0 0.5em;
+  width: 355px;
+  padding: 0.5em;
+  font-size: 1em;
+  outline: 0;
+  font-family: 'Open Sans', sans-serif;
+  border: 1px solid #bababa;
+  border-radius: 0.25em;
+}
+
+/* Subir */
+
+#subirform textarea {
+  border: 2px solid #acacac;
+  border-radius: 0.5em;
+  margin-top: 1em;
+  width: 100%;
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Open Sans', sans-serif;
+  resize: none;
+}
+
+#subirform label {
+  font-weight: 600;
+}
+
+#subirform header {
+  display: flex;
+  padding: 0;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#subirform header a {
+  text-decoration: none;
+  color: var(--black);
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+#subirform header a:hover {
+  text-decoration: underline;
+}
+
+/* Buscar */
+
+#search input[type=text] {
+  width: 150px;
+  font-size: 1em;
+  padding: 0.25em 0.5em;
+}
+
+#search button {
+  background: var(--white);
+  font-size: 1em;
+  border: none;
+  cursor: pointer;
+}
+
+#result {
+  min-height: unset;
+  margin: 3em auto;
+}
+
+.usuario {
+  display: flex;
+  flex-direction: row;
+  margin: 4em 0 0;
+  cursor: pointer;
+}
+
+.usuario .avatar {
+  width: unset;
+  height: unset;
+  max-width: 96px;
+  max-height: 96px;
+  border-radius: 50%;
+  margin-right: 4em;
+}
+
+.usuario .cont-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.cont-user a {
+  font-weight: 400;
+  text-decoration: none;
+  color: var(--black);
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.cont-user p {
+  font-weight: 300;
+  font-size: 1em;
+  margin: 0.5rem 0;
+}
+
+.cont-user #pub {
+  font-weight: 400;
+  font-size: 0.9em;
+  margin-top: 0;
+}
+
+/* Footer */
 
 footer {
   background: var(--white);

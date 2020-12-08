@@ -10,15 +10,19 @@ use Illuminate\Support\Facades\Storage;
 
 use App\User;
 
-class ProfileController extends Controller
-{
+class ProfileController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request) {
-        //
+        $users = DB::table('usuarios')->where('username', 'like', $request->search.'%')->get();
+        return view('search', array(
+          'titulo' => "Buscar",
+          'principal' => true,
+          'users' => $users,
+        ));
     }
 
     /**
@@ -78,6 +82,9 @@ class ProfileController extends Controller
         'img' => 'required|mimes:jpeg,jpg,png',
       ]);
 
+      $filename = Auth::user()->avatar;
+      Storage::disk('images')->delete($filename);
+
       $filename = $request->user()->username.'.'.$request->file('img')->extension();
 
       Storage::disk('avatars')->putFileAs(
@@ -91,10 +98,10 @@ class ProfileController extends Controller
     }
 
     public function eliminarAvatar() {
-      $filename = $request->user()->username.'.'.$request->file('img')->extension();
+      $filename = Auth::user()->avatar;
       Storage::disk('images')->delete($filename);
 
-      DB::table('usuarios')->where('id', $request->user()->id)->update([
+      DB::table('usuarios')->where('id', Auth::user()->id)->update([
         'avatar' => 'default/default-avatar.png'
       ]);
       return redirect()->action('ProfileController@edit');

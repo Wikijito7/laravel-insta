@@ -16,9 +16,19 @@ function readURL(input) {
      }
 }
 
+function textAreaAdjust(el) {
+  el.style.height = (el.scrollHeight > el.clientHeight) ? (el.scrollHeight)+"px" : "47px";
+}
+
 function sacarDesplegable() {
   let desp = document.getElementById('desp');
   desp.style.display = "block";
+}
+
+function sacarOpciones() {
+  let desp = document.getElementById('opcimage');
+  desp.style.display = "block";
+  console.log(desp.style.display);
 }
 
 function mostrarForm() {
@@ -45,8 +55,11 @@ function upload() {
 window.onclick = function(event) {
   let btn = document.getElementById('profile');
   let desp = document.getElementById('desp');
-
-  if (event.target != btn) {
+  let opcimage = document.getElementById('opcimage');
+  let dots = document.getElementById('dots');
+  
+  if (event.target != btn && event.target != dots) {
     desp.style.display = "none";
+    opcimage.style.display = "none";
   }
 }

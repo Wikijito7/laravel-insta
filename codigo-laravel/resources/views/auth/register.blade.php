@@ -5,7 +5,7 @@
 @include('head')
 @include('header')
 
-<section>
+<section class="log-reg">
   <h1>Crear cuenta</h1>
   <form method="POST" action="{{ route('register') }}">
       @csrf
@@ -14,7 +14,7 @@
       <input id="username" type="text" class="form-control @error('name') is-invalid @enderror" name="username" value="{{ old('name') }}" required autocomplete="name" autofocus>
       <br>
       @error('name')
-          <span class="invalid-feedback" role="alert">
+          <span class="error">
               <strong>{{ $message }}</strong>
           </span>
           <br>
@@ -24,7 +24,7 @@
       <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
       <br>
       @error('email')
-          <span class="invalid-feedback" role="alert">
+          <span class="error">
               <strong>{{ $message }}</strong>
           </span>
           <br>
@@ -36,7 +36,7 @@
       <br>
 
       @error('password')
-          <span class="invalid-feedback" role="alert">
+          <span class="error">
               <strong>{{ $message }}</strong>
           </span>
           <br>
@@ -46,12 +46,16 @@
       <br>
       <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
       <br>
-
-      <button type="submit">Registrarse</button>
-      <br>
-      <a href="{{route('login')}}">¿Tienes cuenta?</a>
+      <div class="center">
+        <button type="submit">Registrarse</button>
+        <br>
+        <a href="{{route('login')}}">¿Tienes cuenta?</a>
+      </div>
 
   </form>
 </section>
 
-@include('footer')
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+<script defer src="/js/script.js"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 ?>
 @include('head')
 @include('header')
-<section>
+<section class="log-reg">
   <h1>Login</h1>
   <form method="POST" action="{{ route('login') }}">
       @csrf
@@ -27,9 +27,14 @@
       @enderror
       <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
       <label for="remember">Recuérdame</label><br>
+      <div class="center">
+        <button type="submit">Iniciar sesión</button><br>
+        <a href="{{route('register')}}">¿No tienes cuenta? Regístrate</a>
+      </div>
 
-      <button type="submit">Iniciar sesión</button><br>
-      <a href="{{route('register')}}">¿No tienes cuenta? Regístrate</a>
   </form>
 </section>
-@include('footer')
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+<script defer src="/js/script.js"></script>
+</body>
+</html>

@@ -1,9 +1,13 @@
 <header>
   <a id="insta" href="/">Instagram</a>
   @if ($principal)
+  <form id="search" action="/buscar" method="post">
+    @csrf
+    <input type="text" name="search" placeholder="Buscar..." value="" autocomplete="false">
+    <button type="submit"><i class="fas fa-search"></i></button>
+  </form>
   <nav>
     <a href="/subir"><i class="far fa-plus-square"></i></a>
-    <a href="/buscar"><i class="fas fa-search"></i></a>
     <div class="">
       <a id="profile" onclick="sacarDesplegable()">{{ Auth::user()->username }}</a>
       <div id="desp" class="desp">
